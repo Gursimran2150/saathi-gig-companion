@@ -1,0 +1,89 @@
+@import "tailwindcss";
+
+/* Tokens from DESIGN.md (Uber-inspired): black/white duet, pill controls, soft canvas inputs. */
+:root {
+  --background: #ffffff;
+  --foreground: #000000;
+  --surface: #ffffff;
+  --surface-muted: #f3f3f3;
+  --surface-strong: #efefef;
+  --surface-pressed: #e2e2e2;
+  --border: #e2e2e2;
+  --muted: #5e5e5e;
+  --accent: #000000;
+  --accent-foreground: #ffffff;
+  --danger: #c81e1e;
+  --success: #0e7a3a;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #000000;
+    --foreground: #ffffff;
+    --surface: #161616;
+    --surface-muted: #1f1f1f;
+    --surface-strong: #282828;
+    --surface-pressed: #333333;
+    --border: #333333;
+    --muted: #b3b3b3;
+    --accent: #ffffff;
+    --accent-foreground: #000000;
+    --danger: #ff8a8a;
+    --success: #5fd38d;
+  }
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-surface-strong: var(--surface-strong);
+  --color-border: var(--border);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-danger: var(--danger);
+  --color-success: var(--success);
+  --font-sans: var(--font-geist-sans), system-ui, "Helvetica Neue", Arial, sans-serif;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  font-size: 16px;
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-accent px-6 font-medium text-accent-foreground hover:opacity-85 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent disabled:cursor-not-allowed disabled:opacity-40;
+  }
+  .btn-secondary {
+    @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-foreground bg-background px-6 font-medium hover:bg-surface-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent;
+  }
+  .btn-subtle {
+    @apply inline-flex min-h-11 items-center justify-center gap-1.5 rounded-full bg-surface-strong px-4 text-sm font-medium hover:bg-[var(--surface-pressed)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent;
+  }
+  .card {
+    @apply rounded-2xl border border-border bg-surface p-6;
+  }
+  .field-label {
+    @apply mb-1.5 block font-medium;
+  }
+  .input {
+    @apply min-h-12 w-full rounded-lg border border-transparent bg-surface-strong px-4 py-3 placeholder:text-muted focus:border-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent;
+  }
+  .skip-link {
+    @apply absolute left-2 top-2 z-50 -translate-y-20 rounded-full bg-accent px-4 py-2 text-accent-foreground focus:translate-y-0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
